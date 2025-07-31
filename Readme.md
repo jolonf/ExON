@@ -1,10 +1,10 @@
 # ExON library
 
-Exon is a Swift package library which which serialises objects in the ExON (Exploded Object Notation) format.
+Exon is a Swift package library which serialises objects to the ExON (Exploded Object Notation) format.
 
 ## ExON (Exploded Object Notation) format
 
-ExON, whose name is a take off of JSON, is a way to serialise Swift objects using file system primitives.
+ExON, whose name is a take off of JSON, is a way to serialise objects using file system primitives.
 
 All properties are either stored in a file or directory, where the name of the file/directory is the property name.
 
@@ -130,3 +130,16 @@ try await encoder.encode(person, to: baseURL)
 ```swift
 try await decoder.decode(person, from: baseURL)
 ```
+
+## Data Types Supported
+
+- Optionals
+ - nil value does not write a file or directory
+ - Missing file or directory has nil value
+- Enums
+- String
+- Int
+- Double
+- Array
+- Dictionary
+- Nested structs
