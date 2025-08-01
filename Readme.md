@@ -26,8 +26,8 @@ class Person: Codable {
 would be stored as the following text files:
 
 ```
-- name.txt
-- age.txt
+├-- name.txt
+└-- age.txt
 ```
 
 ### Arrays/Dictionaries
@@ -42,12 +42,12 @@ class Student: Codable {
 ```
 
 ```
-- name.txt
-- grades/
-  - 0.txt
-  - 1.txt
-  - 2.txt
-  - ...
+├-- name.txt
+└-- grades/
+  ├-- 0.txt
+  ├-- 1.txt
+  ├-- 2.txt
+  └-- ...
 
 ```
 
@@ -66,18 +66,18 @@ class Item: Codable {
 ```
 
 ```
-- timestamp.txt
-- items/
- - 0/
-  - name.txt
-  - price.txt
- - 1/
-  - name.txt
-  - price.txt
- - 2/
-  - name.txt
-  - price.txt
- - ...
+├── timestamp.txt
+└── items/
+    ├── 0/
+    │   ├── name.txt
+    │   └── price.txt
+    ├── 1/
+    │   ├── name.txt
+    │   └── price.txt
+    ├── 2/
+    │   ├── name.txt
+    │   └── price.txt
+    └── ...
 ```
 
 ## Codable
@@ -122,8 +122,8 @@ let decoded = try decoder.decode(Person.self, from: baseURL)
 ## Data Types Supported
 
 - Optionals
- - nil value does not write a file or directory
- - Missing file or directory has nil value
+  - nil value does not write a file or directory
+  - Missing file or directory has nil value
 - Enums
 - String
 - Int
