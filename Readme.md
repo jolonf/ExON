@@ -26,8 +26,8 @@ class Person: Codable {
 would be stored as the following text files:
 
 ```
-├-- name.txt
-└-- age.txt
+├── name.txt
+└── age.txt
 ```
 
 ### Arrays/Dictionaries
@@ -42,12 +42,12 @@ class Student: Codable {
 ```
 
 ```
-├-- name.txt
-└-- grades/
-  ├-- 0.txt
-  ├-- 1.txt
-  ├-- 2.txt
-  └-- ...
+├── name.txt
+└── grades/
+  ├── 0.txt
+  ├── 1.txt
+  ├── 2.txt
+  └── ...
 
 ```
 
