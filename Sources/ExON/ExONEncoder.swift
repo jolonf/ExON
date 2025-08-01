@@ -34,23 +34,6 @@ public final class ExONEncoder {
             try encoder.encode(value)
         }
     }
-    
-    /// Encode asynchronously.
-    public func encode<T: Encodable>(_ value: T, to url: URL) async throws {
-        try await withCheckedThrowingContinuation { continuation in
-            queue.async(flags: .barrier) {
-                do {
-                    // Ensure that the base path exists
-                    try self.fileManager.createDirectory(at: url, withIntermediateDirectories: true)
-                    let encoder = _ExONInternalEncoder(fileExtension: self.fileExtension, fileManager: self.fileManager, baseURL: url)
-                    try encoder.encode(value)
-                    continuation.resume()
-                } catch {
-                    continuation.resume(throwing: error)
-                }
-            }
-        }
-    }
 }
 
 // MARK: - Internal Encoder

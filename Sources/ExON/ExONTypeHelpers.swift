@@ -6,7 +6,7 @@ func isBasicType<T>(_ value: T) -> Bool {
     switch value {
     case is String, is Int, is Double, is Bool, is Float, is Date, is URL, is UUID:
         return true
-    case let v as RawRepresentable where v.rawValue is String || v.rawValue is Int:
+    case let v as any RawRepresentable where v.rawValue is String || v.rawValue is Int:
         return true
     default:
         return false
@@ -36,7 +36,7 @@ func encodeBasicTypeToData<T>(_ value: T) throws -> Data {
         return v.absoluteString.data(using: .utf8) ?? Data()
     case let v as UUID:
         return v.uuidString.data(using: .utf8) ?? Data()
-    case let v as RawRepresentable:
+    case let v as any RawRepresentable:
         if let raw = v.rawValue as? String {
             return raw.data(using: .utf8) ?? Data()
         } else if let raw = v.rawValue as? Int {

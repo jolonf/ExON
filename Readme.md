@@ -119,18 +119,6 @@ let baseURL = URL("~/Desktop/person")
 let decoded = try decoder.decode(Person.self, from: baseURL)
 ```
 
-### Async/Await
-
-Both encode and decode have async versions:
-
-```swift
-try await encoder.encode(person, to: baseURL)
-```
-
-```swift
-try await decoder.decode(person, from: baseURL)
-```
-
 ## Data Types Supported
 
 - Optionals

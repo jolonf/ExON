@@ -20,11 +20,8 @@ final class ExONKeyedEncodingContainer<Key: CodingKey>: KeyedEncodingContainerPr
     
     func encode<T: Encodable>(_ value: T, forKey key: Key) throws {
         let url = encoder.baseURL.appendingPathComponent(key.stringValue)
-        print("Encoding: \(url)")
         if isBasicType(value) {
             let fileURL = url.appendingPathExtension(encoder.fileExtension.trimmingCharacters(in: ["."]))
-            print("ext: \(encoder.fileExtension)")
-            print("Encoding (with ext): \(fileURL)")
             let data = try encodeBasicTypeToData(value)
             try data.write(to: fileURL, options: .atomic)
         } else {
@@ -123,7 +120,6 @@ final class ExONSingleValueEncodingContainer: SingleValueEncodingContainer {
     }
 
     func encode<T: Encodable>(_ value: T) throws {
-        print("Encoding: \(encoder.baseURL)")
         if isBasicType(value) {
             let fileURL = encoder.baseURL.appendingPathExtension(encoder.fileExtension.trimmingCharacters(in: ["."]))
             let data = try encodeBasicTypeToData(value)

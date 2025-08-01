@@ -32,13 +32,13 @@ struct ExONCoreTests {
     }
 
     @Test("Encode/decode array properties")
-    func testStudentGrades() async throws {
+    func testStudentGrades() throws {
         let encoder = ExONEncoder()
         let decoder = ExONDecoder()
         let base = tempDir.appendingPathComponent("student")
         let s = Student(name: "Bob", grades: [90, 87, 99])
-        try await encoder.encode(s, to: base)
-        let decoded = try await decoder.decode(Student.self, from: base)
+        try encoder.encode(s, to: base)
+        let decoded = try decoder.decode(Student.self, from: base)
         #expect(decoded == s)
     }
 
@@ -60,9 +60,6 @@ struct ExONCoreTests {
         let cart = Cart(timestamp: now, items: [Item(name: "apple", price: 2), Item(name: "orange", price: 4)])
         try encoder.encode(cart, to: base)
         let decoded = try decoder.decode(Cart.self, from: base)
-        
-        print("Initial timestamp: \(now.timeIntervalSince1970)")
-        print("Decoded timestamp: \(decoded.timestamp.timeIntervalSince1970)")
         
         #expect(decoded.items.count == 2)
         #expect(decoded.items[0].name == "apple")
@@ -87,5 +84,21 @@ struct ExONCoreTests {
         try encoder.encode(v2, to: base2)
         let decoded2 = try decoder.decode(EnumTest.self, from: base2)
         #expect(decoded2 == v2)
+    }
+    
+    @Test("Encode and decode top-level Int")
+    func testTopLevelIntEncodeDecode() throws {
+        let encoder = ExONEncoder()
+        let decoder = ExONDecoder()
+        let base = tempDir.appendingPathComponent("topLevelInt")
+        let number: Int = 12345
+        try encoder.encode(number, to: base)
+        // Check the file exists and contents
+        let fileURL = base.appendingPathExtension("txt")
+        let contents = try String(contentsOf: fileURL)
+        #expect(contents.trimmingCharacters(in: .whitespacesAndNewlines) == String(number))
+        // Decode back
+        let decoded = try decoder.decode(Int.self, from: base)
+        #expect(decoded == number)
     }
 }

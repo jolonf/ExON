@@ -31,21 +31,6 @@ public final class ExONDecoder {
             return try decoder.decode(type)
         }
     }
-    
-    /// Decode asynchronously.
-    public func decode<T: Decodable>(_ type: T.Type, from url: URL) async throws -> T {
-        try await withCheckedThrowingContinuation { continuation in
-            queue.async {
-                do {
-                    let decoder = _ExONInternalDecoder(fileExtension: self.fileExtension, fileManager: self.fileManager, baseURL: url)
-                    let value = try decoder.decode(type)
-                    continuation.resume(returning: value)
-                } catch {
-                    continuation.resume(throwing: error)
-                }
-            }
-        }
-    }
 }
 
 // MARK: - Internal Decoder
